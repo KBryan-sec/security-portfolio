@@ -104,44 +104,36 @@ Kali snapshot:
 
 ## Challenges and Fixes
 
-**1. Wrong OS type in the new VM wizard.**
-Problem: The wizard defaulted to Windows 11 64-bit.
-Fix: Changed it to Linux, Ubuntu 32-bit, since Metasploitable 2 is an old 32-bit Ubuntu.
-Takeaway: Don't trust the defaults. Match the VM settings to what's actually on the disk.
+**GitHub signup blocked in Chrome.** I got a page saying "We detected unusual activity from your device or network" and couldn't get past it. I opened Edge instead and the signup went through.
 
-**2. Leftover IPv6 address from NAT.**
-Problem: Metasploitable booted once before I moved its adapter off NAT. `ifconfig` showed a leftover global IPv6 address (starting fd17) handed out by VirtualBox NAT.
-Fix: Switched Adapter 1 to Internal Network `soclab` and rebooted. The address was gone.
-Takeaway: Check the adapter before first boot, and read the whole interface output, not just the IPv4 line.
+**Mixing up the lab and GitHub.** I honestly thought GitHub Desktop was the lab at first. It took me a bit to get straight that the lab is the two virtual machines in VirtualBox, and GitHub is only where the writeup and screenshots live.
 
-**3. Two commands on one line.**
-Problem: I typed `sudo ifconfig ... up ifconfig` as one line and got a "Host name lookup failure".
-Fix: Ran them as two separate commands.
-Takeaway: One command per line unless I mean to chain them.
+**Wrong OS in the Metasploitable wizard.** The new VM wizard was set to Microsoft Windows, Windows 11 (64-bit), so I changed the OS to Linux. Ubuntu wasn't showing in the distribution dropdown until I scrolled down for it. I picked Ubuntu (32-bit) because Metasploitable 2 is an old 32-bit Ubuntu.
 
-**4. Connection name is case sensitive.**
-Problem: `nmcli con up "wired connection 1"` failed with unknown connection.
-Fix: It needed a capital W. Linux is case sensitive. I found that out the annoying way.
-Takeaway: Copy names exactly as the system shows them.
+**The missing Metasploitable disk.** On the hard disk step the selector only listed the Kali disk, and I figured the Metasploitable one was gone. It wasn't. I had to click Add and browse to `Metasploitable.vmdk` myself.
 
-**5. Missing count on ping.**
-Problem: I left the number off `ping -c` and got "invalid argument".
-Fix: `-c` needs a number, like `ping -c 4`.
-Takeaway: Read the error. It was telling me exactly what was wrong.
+**Kali running with no window.** VirtualBox Manager said Kali was Running, but no window came up when I tried to open it. A leftover VirtualBox dialog was still open and blocking things. Once I closed that out, Show worked.
 
-**6. IPs that disappeared on reboot.**
-Problem: IPs I set by hand with `ip addr add` and `ifconfig` did not survive a reboot.
-Fix: Used the permanent config shown in Build Steps (NetworkManager on Kali, `/etc/network/interfaces` on Metasploitable).
-Takeaway: A working IP right now doesn't mean it's saved.
+**Screenshots that never saved.** Win+Shift+S only copies the screenshot to the clipboard, and there's no save prompt, so nothing was landing in a folder. I switched to the Snipping Tool and used Ctrl+S to save PNGs into the screenshots folder.
+
+**Two commands on one line.** On Metasploitable I typed `sudo ifconfig eth0 192.168.56.20 netmask 255.255.255.0 up ifconfig` all as one line and got `ifconfig: Host name lookup failure`. Running them one at a time worked fine.
+
+**The extra IPv6 address.** `ifconfig` on Metasploitable showed a global IPv6 address starting with `fd17` that I never set. It came from VirtualBox NAT, because the VM had booted before I switched its adapter to the internal network. I changed Adapter 1 to Internal Network `soclab`, rebooted, and the address was gone and pings to Kali worked.
+
+**Three tries at nmcli, plus one bad ping.** Making Kali's IP permanent took me three attempts. First I left the address off and got `Error: value for 'ipv4.addresses' is missing.` Then I typed it with no space between `ipv4.addresses` and the IP and got the same kind of error. Then `sudo nmcli con up "wired connection 1"` failed with `Error: unknown connection 'wired connection 1'.` because it needed a capital W, so `"Wired connection 1"`. Later I typed `ping -c 192.168.56.20` and got `ping: invalid argument: '192.168.56.20'`. The `-c` wants a count, so it's `ping -c 4 192.168.56.20`.
+
+**IPs that wouldn't have survived a reboot.** The addresses I first set by hand (`ip addr add` on Kali, `ifconfig` on Metasploitable) would have been gone after a restart. I made them permanent with nmcli on Kali and by editing `/etc/network/interfaces` in nano on Metasploitable. Then I rebooted Metasploitable and ran `ifconfig eth0` to confirm the address came back on its own.
+
+**The network diagram.** I had help generating the draw.io file from my real settings.
 
 ## What I Learned
 
-- NAT, Bridged, and Internal Network are not the same thing. NAT gives a VM internet through the host. Bridged puts it on my real network. Internal Network only connects VMs to each other, which is what I wanted here.
-- /24 means the first three numbers are the network. So 192.168.56.1 to 192.168.56.254 are all on the same network, and that's why Kali and Metasploitable can talk.
-- ttl=64 in a ping reply hints the other side is Linux. Windows usually starts at a different value.
-- Setting an IP by hand is temporary. Editing the config files is permanent. I learned the difference after a reboot wiped my work.
-- Snapshots are cheap insurance. Take one while everything is clean, then break things freely.
-- A deliberately vulnerable box has to stay isolated. Metasploitable is easy to break into on purpose, so it should never touch the internet or my home network.
+- The lab is the VMs. GitHub is just where I document it, which I had backwards for a while.
+- NAT lets a VM out to the internet through the host PC, Bridged puts it on my real home network, and Internal Network only lets the VMs see each other. The `fd17` address was how I actually saw the difference, since it only showed up because the VM had touched NAT.
+- With /24, the first three numbers (192.168.56) are the network and the last number is the machine. That's why .10 and .20 can reach each other.
+- The failed ping to 8.8.8.8 (`Network is unreachable`) was the result I wanted. Metasploitable is built to be broken into, so it has no business near the internet.
+- Linux is exact about spacing, capital letters, and one command per line. Most of my errors were typing, and the error message usually said what was wrong. The ttl=64 in the ping replies also fits a Linux machine.
+- An IP that works right now isn't saved until it's in the config. The `clean-baseline` snapshot means I can roll back when a later lab breaks something.
 
 ## Next Steps
 
