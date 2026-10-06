@@ -1,0 +1,28 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="lab" name="Lab Network">
+    <mxGraphModel dx="800" dy="600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="800" pageHeight="600" math="0" shadow="0" background="#ffffff">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="host" value="Host PC: Windows 11 (VirtualBox)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontFamily=Helvetica;fontSize=16;fontStyle=1;verticalAlign=top;spacingTop=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="640" height="400" as="geometry"/>
+        </mxCell>
+        <mxCell id="net" value="Internal Network: soclab (192.168.56.0/24)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontFamily=Helvetica;fontSize=14;fontStyle=1;verticalAlign=top;spacingTop=12;" vertex="1" parent="1">
+          <mxGeometry x="80" y="110" width="560" height="260" as="geometry"/>
+        </mxCell>
+        <mxCell id="kali" value="&lt;b&gt;Kali Linux&lt;/b&gt;&lt;br&gt;Analyst&lt;br&gt;192.168.56.10" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontFamily=Helvetica;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="120" y="200" width="190" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="meta" value="&lt;b&gt;Metasploitable 2&lt;/b&gt;&lt;br&gt;Target&lt;br&gt;192.168.56.20" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontFamily=Helvetica;fontSize=14;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="410" y="200" width="190" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge" value="" style="endArrow=classic;startArrow=classic;html=1;strokeColor=#333333;strokeWidth=2;" edge="1" parent="1" source="kali" target="meta">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="note" value="No route to Internet or home network" style="text;html=1;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=16;fontStyle=1;fontColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="40" y="455" width="640" height="30" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
