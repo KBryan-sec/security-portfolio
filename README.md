@@ -22,15 +22,15 @@ There are two tracks here. The blue team track is about watching the network, re
 
 | # | Lab | What it covers | Status |
 |---|-----|----------------|--------|
-| 1 | Build the Directory | Windows Server domain controller, OUs, users, and groups for a fictional clinic; join a Windows 11 client | Planned |
-| 2 | Identity Help Desk Operations | Password resets, unlocks, disabled accounts, lockout policies | Planned |
+| 1 | [Build the Directory](iam-01-active-directory-build/) | Windows Server domain controller, OUs, users, and groups for a fictional clinic; join a Windows 11 client | Complete |
+| 2 | [Identity Help Desk Operations](iam-02-help-desk-operations/) | Password resets, unlocks, disabled accounts, lockout policies, offboarding | Complete |
 | 3 | RBAC and Least Privilege | Role groups and shared folders, tested as each user | Planned |
 | 4 | Delegated Administration | A Help Desk group that can reset passwords in one OU only | Planned |
 | 5 | Joiner, Mover, Leaver with PowerShell | Bulk create from CSV, department moves, offboarding | Planned |
-| 6 | Entra ID Tenant and MFA | Free tenant, users, groups, admin roles, MFA | Planned |
+| 6 | Entra ID Tenant, MFA, and Conditional Access | Free tenant, users, groups, admin roles, MFA and MFA resets, Conditional Access policies | Planned |
 | 7 | Single Sign-On | Connecting a SaaS app to Entra ID | Planned |
 | 8 | Access Request and Approval Workflow | Request form, approval, fulfillment, audit trail | Planned |
-| 9 | Access Review and Certification (Capstone) | Export memberships, review, remediate, report | Planned |
+| 9 | Automated Access Review (Capstone) | PowerShell script that exports memberships, flags stale and disabled accounts, and builds the review report | Planned |
 
 ## Lab Environment
 
@@ -38,7 +38,7 @@ There are two tracks here. The blue team track is about watching the network, re
 - Kali Linux as the analyst and attacker machine
 - Metasploitable 2 as the intentionally vulnerable target
 - A VirtualBox internal network with no route to the internet or my home network
-- Windows Server and Windows 11 VMs will be added for the IAM track
+- Windows Server 2022 domain controller (DC01) and a Windows 11 workstation (CLIENT01) on a separate internal network for the IAM track
 
 ## Tools and Skills So Far
 
@@ -48,6 +48,12 @@ There are two tracks here. The blue team track is about watching the network, re
 - Static IP configuration
 - Network segmentation
 - Snapshots
+- Active Directory Domain Services and DNS
+- OU design and security groups
+- PowerShell (ActiveDirectory module)
+- Domain join and workstation management
+- Account lockout policy and troubleshooting (Event ID 4740)
+- Password resets, account enable/disable, and offboarding
 - Technical documentation
 
 ## Background

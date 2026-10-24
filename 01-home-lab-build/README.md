@@ -124,8 +124,6 @@ Kali snapshot:
 
 **IPs that wouldn't have survived a reboot.** The addresses I first set by hand (`ip addr add` on Kali, `ifconfig` on Metasploitable) would have been gone after a restart. I made them permanent with nmcli on Kali and by editing `/etc/network/interfaces` in nano on Metasploitable. Then I rebooted Metasploitable and ran `ifconfig eth0` to confirm the address came back on its own.
 
-**The network diagram.** I had help generating the draw.io file from my real settings.
-
 ## What I Learned
 
 - The lab is the VMs. GitHub is just where I document it, which I had backwards for a while.
