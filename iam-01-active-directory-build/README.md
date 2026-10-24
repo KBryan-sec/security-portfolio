@@ -14,7 +14,7 @@ Every IAM lab after this one needs a real directory to work against, so this is 
 
 ## Lab Architecture
 
-![IAM lab network diagram](diagrams/iam-lab-diagram.png)
+![IAM lab network diagram](<diagrams/iam lab diagram.png>)
 
 Both VMs sit on a VirtualBox Internal Network named `iamlab`. Nothing else is attached, so they can only see each other. This is a separate network from my SOC lab (`soclab`), so the two tracks don't touch.
 
