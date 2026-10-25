@@ -28,7 +28,7 @@ There are two tracks here. The blue team track is about watching the network, re
 | 4 | Delegated Administration | A Help Desk group that can reset passwords in one OU only | Planned |
 | 5 | Joiner, Mover, Leaver with PowerShell | Bulk create from CSV, department moves, offboarding | Planned |
 | 6 | Entra ID Tenant, MFA, and Conditional Access | Free tenant, users, groups, admin roles, MFA and MFA resets, Conditional Access policies | Planned |
-| 7 | Single Sign-On | Connecting a SaaS app to Entra ID | Planned |
+| 7 | Single Sign-On with Entra ID and Okta | Connecting a SaaS app to Entra ID, plus SSO and MFA in an Okta developer account | Planned |
 | 8 | Access Request and Approval Workflow | Request form, approval, fulfillment, audit trail | Planned |
 | 9 | Automated Access Review (Capstone) | PowerShell script that exports memberships, flags stale and disabled accounts, and builds the review report | Planned |
 
